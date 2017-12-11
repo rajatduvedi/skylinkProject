@@ -1,0 +1,154 @@
+<div *ngIf="!joined">
+  <input id="name" type="text" autofocus="" placeholder="My name" [(ngModel)]= "name">
+  <button (click)="joinRoomHost()">Join as Host</button>
+  <button (click)="joinRoomPeer()">Join as Peer</button>
+</div>
+<div *ngIf="joined">
+  <div *ngIf="joinedSite == 'peer'">
+      <div class="main_container">
+      	<div class="row">
+      		<div class="col-md-7">
+            <h1>Peer</h1>
+      			<div class="video_section">
+      				<iframe width="774" height="315" src="https://www.youtube.com/embed/G4PQLyeJKY8" frameborder="0" allowfullscreen=""></iframe>
+      			</div>
+      		</div>
+      		<div class="col-md-3">
+      			<div class="chat_section">
+      				<ul class="nav nav-pills">
+        					<li class="active"><a href="#">All</a></li>
+        					<li><a href="#">Private chat</a></li>
+      				</ul>
+              <ul>
+                <li *ngFor = "let message of ChatMessage">{{message}}</li>
+              </ul>
+              <input id="message" type="text" placeholder="My message" [(ngModel)]="message">
+              <button (click)="sendMessage()">Send message</button>
+      			</div>
+      		</div>
+      		<div class="col-md-2">
+      			<div class="user_section">
+      				<div>
+      					<p>Participants</p>
+      					<ul>
+                  <li *ngFor = "let user of peerList"> {{ user }}</li>
+
+      					</ul>
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+      	<div class="row user_box">
+      		<div class="col-md-10">
+      			<div class="col-md-2">
+      				<div class="comn_users active">
+      					<img src="assets/images/user-icon-6.png">
+      				</div>
+      			</div>
+      			<div class="col-md-2">
+      				<div class="comn_users">
+      					<img src="assets/images/user-icon-6.png">
+      				</div>
+      			</div>
+      			<div class="col-md-2">
+      				<div class="comn_users">
+      					<img src="assets/images/user-icon-6.png">
+      				</div>
+      			</div>
+      			<div class="col-md-2">
+      				<div class="comn_users">
+      					<img src="assets/images/user-icon-6.png">
+      				</div>
+      			</div>
+      			<div class="col-md-2">
+      				<div class="comn_users">
+      					<img src="assets/images/user-icon-6.png">
+      				</div>
+      			</div>
+      		</div>
+      		<div class="col-md-2 toggle_btns">
+      			<a href="">Toggle Screenshare</a>
+      			<a href="">Toggle Microphone</a>
+      		</div>
+      	</div>
+      </div>
+    </div>
+    <div *ngIf="joinedSite == 'host'">
+        <div class="main_container">
+          <div class="row">
+            <div class="col-md-7">
+              <h1>host</h1>
+              <div class="video_section">
+                <iframe width="774" height="315" src="https://www.youtube.com/embed/G4PQLyeJKY8" frameborder="0" allowfullscreen=""></iframe>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="chat_section">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">All</a></li>
+                    <li><a href="#">Private chat</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="user_section">
+                <div>
+                  <p>Participants</p>
+                  <ul>
+                    <li>peer 1</li>
+                    <li>peer 2</li>
+                    <li>peer 3</li>
+                    <li>peer 4</li>
+                    <li>peer 5</li>
+                    <li>peer 6</li>
+                    <li>peer 7</li>
+                    <li>peer 8</li>
+                    <li>peer 9</li>
+                    <li>peer 10</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row user_box">
+            <div class="col-md-10">
+              <div class="col-md-2">
+                <div class="comn_users active">
+                  <img src="assets/images/user-icon-6.png">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="comn_users">
+                  <img src="assets/images/user-icon-6.png">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="comn_users">
+                  <img src="assets/images/user-icon-6.png">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="comn_users">
+                  <img src="assets/images/user-icon-6.png">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="comn_users">
+                  <img src="assets/images/user-icon-6.png">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 toggle_btns">
+              <a href="">Toggle Screenshare</a>
+              <a href="">Toggle Microphone</a>
+            </div>
+          </div>
+        </div>
+      </div>
+<button (click)="leaveRoom()">Leave room</button>
+
+
+<div id="container"></div>
+</div>
+<!-- </body>
+</html> -->
