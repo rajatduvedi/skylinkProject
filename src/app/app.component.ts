@@ -1,5 +1,6 @@
 import { Component , OnInit , ViewChild } from '@angular/core';
 declare var Skylink;
+declare var attachMediaStream;
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
   joined = 0;
   joinedSite = '';
   peerList = [];
-  id = '';
+  ids = [];
   ChatMessage = [];
   skylinkDemo = new Skylink();
 
@@ -31,14 +32,9 @@ export class AppComponent implements OnInit {
     console.log("joined")
     console.log(peerId)
     console.log(peerInfo)
-    console.log(isSelf)
-// We already have a video element for our video and don't need to create a new one.
-    let vid = document.createElement('video');
-    vid.autoplay = true;
-    vid.muted = true; // Added to avoid feedback when testing locally
-    vid.id = peerId;
-    this.id = peerId;
-    document.body.appendChild(vid);
+    console.log(isSelf);
+    if(isSelf) return;
+    this.ids.push( peerId);
 
     if(!isSelf) {
       console.log("joinedk")
@@ -122,5 +118,9 @@ export class AppComponent implements OnInit {
   }
    leaveRoom() {
   this.skylinkDemo.leaveRoom();
+  }
+
+  handsUp() {
+    console.log("hello")
   }
 }

@@ -1,18 +1,28 @@
 <div *ngIf="!joined">
   <input id="name" type="text" autofocus="" placeholder="My name" [(ngModel)]= "name">
-  <button (click)="joinRoomHost()">Join as Host</button>
+  <button (click)="joinRoomHost()" disabled>Join as Host</button>
   <button (click)="joinRoomPeer()">Join as Peer</button>
 </div>
 <div *ngIf="joined">
   <div *ngIf="joinedSite == 'peer'">
       <div class="main_container">
       	<div class="row">
-      		<div class="col-md-7">
-            <h1>Peer</h1>
-      			<div class="video_section">
-              <!-- <video controls></video> -->
-      				<!-- <iframe width="774" height="315" src="https://www.youtube.com/embed/G4PQLyeJKY8" frameborder="0" allowfullscreen=""></iframe> -->
-              <video controls id="myvideo"  autoplay muted></video>
+      		<div class="col-md-6">
+            <div class="col-md-8">
+              <h1>Host</h1>
+        			<div class="video_section">
+                <!-- <video controls></video> -->
+        				<!-- <iframe width="774" height="315" src="https://www.youtube.com/embed/G4PQLyeJKY8" frameborder="0" allowfullscreen=""></iframe> -->
+                <video controls id="myvideo"  width="774" height="315" autoplay muted></video>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <h1>Peer</h1>
+        			<div class="video_section">
+                <!-- <video controls></video> -->
+        				<!-- <iframe width="774" height="315" src="https://www.youtube.com/embed/G4PQLyeJKY8" frameborder="0" allowfullscreen=""></iframe> -->
+                <!-- <video controls [id]="id" width="774" height="315" autoplay muted></video> -->
+              </div>
             </div>
       		</div>
       		<div class="col-md-3">
@@ -42,33 +52,14 @@
       	</div>
       	<div class="row user_box">
       		<div class="col-md-10">
-      			<div class="col-md-2">
+      			<div class="col-md-2" *ngFor ="let id of ids">
       				<div class="comn_users active">
-      					<img src="assets/images/user-icon-6.png">
-      				</div>
-      			</div>
-      			<div class="col-md-2">
-      				<div class="comn_users">
-      					<img src="assets/images/user-icon-6.png">
-      				</div>
-      			</div>
-      			<div class="col-md-2">
-      				<div class="comn_users">
-      					<img src="assets/images/user-icon-6.png">
-      				</div>
-      			</div>
-      			<div class="col-md-2">
-      				<div class="comn_users">
-      					<img src="assets/images/user-icon-6.png">
-      				</div>
-      			</div>
-      			<div class="col-md-2">
-      				<div class="comn_users">
-      					<img src="assets/images/user-icon-6.png">
+                <video controls [id]="id" width="120" height="120" autoplay muted></video>
       				</div>
       			</div>
       		</div>
       		<div class="col-md-2 toggle_btns">
+            <button (click)="handsUp()">Hands up</button>
       			<a href="">Toggle Screenshare</a>
       			<a href="">Toggle Microphone</a>
       		</div>
