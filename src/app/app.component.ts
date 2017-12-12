@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     // var skylinkDemo = new Skylink();
     this.skylinkDemo.init( "5ba8467c-f982-43e1-9fab-1093f8c73f45", function (error, success) {
      if (success) {
-       console.log("hello");
+       console.log("conneted");
      };
 
     }.bind(this));
