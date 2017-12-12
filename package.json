@@ -5,7 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "heroku-prebuild": "npm install -g http-server",
+    "heroku-postbuild": "ng build --prod",
+    "start": "http-server dist/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
