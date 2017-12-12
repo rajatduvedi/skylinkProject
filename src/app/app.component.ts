@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , OnInit , ViewChild } from '@angular/core';
 declare var Skylink;
 
 @Component({
@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   joined = 0;
   joinedSite = '';
   peerList = [];
+  id = '';
   ChatMessage = [];
   skylinkDemo = new Skylink();
 
@@ -21,8 +22,9 @@ export class AppComponent implements OnInit {
     this.skylinkDemo.init( "dd3a2d97-27df-4862-966b-b0b296236452", function (error, success) {
      if (success) {
        console.log("hello");
-     }
-    });
+     };
+
+    }.bind(this));
 
     this.skylinkDemo.on('peerJoined', function(peerId, peerInfo, isSelf) {
     var user = 'You';
@@ -30,6 +32,13 @@ export class AppComponent implements OnInit {
     console.log(peerId)
     console.log(peerInfo)
     console.log(isSelf)
+// We already have a video element for our video and don't need to create a new one.
+    let vid = document.createElement('video');
+    vid.autoplay = true;
+    vid.muted = true; // Added to avoid feedback when testing locally
+    vid.id = peerId;
+    this.id = peerId;
+    document.body.appendChild(vid);
 
     if(!isSelf) {
       console.log("joinedk")
@@ -50,6 +59,17 @@ export class AppComponent implements OnInit {
     this.addMessage(user + ': ' + message.content, className);
     }.bind(this));
 
+    this.skylinkDemo.on('incomingStream', function(peerId, stream, isSelf) {
+      console.log(stream);
+      if(isSelf) return;
+      var vid = document.getElementById(peerId);
+      attachMediaStream(vid, stream);
+    }.bind(this));
+
+    this.skylinkDemo.on('mediaAccessSuccess', function(stream) {
+      var vid = document.getElementById('myvideo');
+      attachMediaStream(vid, stream);
+    });
 
   }
 
@@ -70,7 +90,11 @@ export class AppComponent implements OnInit {
    name: this.name,
    site: 'host'
    });
-   this.skylinkDemo.joinRoom();
+  //  this.skylinkDemo.joinRoom();
+  this.skylinkDemo.joinRoom({
+   audio: true,
+   video: true
+ });
    this.joined = 1;
    this.joinedSite = 'host';
  }
@@ -79,7 +103,11 @@ export class AppComponent implements OnInit {
    name: this.name,
    site: 'peer'
    });
-   this.skylinkDemo.joinRoom();
+
+   this.skylinkDemo.joinRoom({
+    audio: true,
+    video: true
+  });
    this.joined = 1;
     this.joinedSite = 'peer';
  }
