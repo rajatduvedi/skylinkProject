@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // var skylinkDemo = new Skylink();
-    this.skylinkDemo.init( "dd3a2d97-27df-4862-966b-b0b296236452", function (error, success) {
+    this.skylinkDemo.init( "5ba8467c-f982-43e1-9fab-1093f8c73f45", function (error, success) {
      if (success) {
        console.log("hello");
      };
